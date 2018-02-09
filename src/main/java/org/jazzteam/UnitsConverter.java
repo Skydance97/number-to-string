@@ -5,9 +5,9 @@ public class UnitsConverter extends AbstractExpandedConverter {
     public UnitsConverter(Long number, Integer classNumber) {
         super(number, classNumber);
         if (!classNumber.equals(2)) {
-            setDictionary(DictionaryLoader.loadDictionary(NumbersEnum.Units));
+            setDictionary(DictionaryLoader.loadDictionary(DictionaryType.Units));
         } else {
-            setDictionary(DictionaryLoader.loadDictionary(NumbersEnum.UnitsForThousands));
+            setDictionary(DictionaryLoader.loadDictionary(DictionaryType.UnitsForThousands));
         }
     }
 

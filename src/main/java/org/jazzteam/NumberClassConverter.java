@@ -8,7 +8,7 @@ public class NumberClassConverter extends AbstractExpandedConverter {
 
     public NumberClassConverter(Long number, Integer classNumber) {
         super(number, classNumber);
-        setDictionary(DictionaryLoader.loadDictionary(NumbersEnum.Classes));
+        setDictionary(DictionaryLoader.loadDictionary(DictionaryType.Classes));
         int numberLength = String.valueOf(number).length();
         if (numberLength > 3) {
             throw new IllegalArgumentException("Number " + number + " has to be in the range from 0 to 999");

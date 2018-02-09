@@ -4,7 +4,7 @@ public class TensConverter extends AbstractExpandedConverter {
 
     public TensConverter(Long number, Integer classNumber) {
         super(number, classNumber);
-        setDictionary(DictionaryLoader.loadDictionary(NumbersEnum.Tens));
+        setDictionary(DictionaryLoader.loadDictionary(DictionaryType.Tens));
     }
 
     @Override

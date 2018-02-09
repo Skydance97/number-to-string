@@ -1,6 +1,6 @@
 package org.jazzteam;
 
-public enum NumbersEnum {
+public enum DictionaryType {
     Units,
     UnitsForThousands,
     Tens,

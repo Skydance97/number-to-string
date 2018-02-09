@@ -4,7 +4,7 @@ public class HundredsConverter extends AbstractExpandedConverter {
 
     public HundredsConverter(Long number, Integer classNumber) {
         super(number, classNumber);
-        setDictionary(DictionaryLoader.loadDictionary(NumbersEnum.Hundreds));
+        setDictionary(DictionaryLoader.loadDictionary(DictionaryType.Hundreds));
     }
 
     @Override
