@@ -1,5 +1,6 @@
 package org.jazzteam;
 
+import org.jazzteam.converter.impl.Converter;
 import org.jazzteam.util.XLSXUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,8 +26,6 @@ public class NumberToStringTest {
 
     @Test
     public void test() {
-        AbstractConverter converter = new Converter(input);
-        converter.convert();
-        Assert.assertEquals("Mismatch of the expected and actual data", expected, converter.getConvertedNumber());
+        Assert.assertEquals("Mismatch of the expected and actual data", expected, new Converter().convert(input));
     }
 }

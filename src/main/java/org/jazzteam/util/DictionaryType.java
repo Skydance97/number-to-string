@@ -1,8 +1,8 @@
-package org.jazzteam;
+package org.jazzteam.util;
 
 public enum DictionaryType {
-    Units,
-    UnitsForThousands,
+    Digits,
+    DigitsForThousands,
     Tens,
     Hundreds,
     Classes
