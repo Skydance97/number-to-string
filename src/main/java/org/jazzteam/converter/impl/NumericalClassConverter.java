@@ -17,9 +17,21 @@ public class NumericalClassConverter extends NumberConverter {
             throw new IllegalArgumentException("Number " + number + " has to be in the range from 0 to 999");
         }
         StringBuilder convertedNumericalClass = new StringBuilder();
+        convertHundreds(convertedNumericalClass, number);
+        convertTens(convertedNumericalClass, number);
+        convertDigits(convertedNumericalClass, number);
+        addClassname(convertedNumericalClass);
+        addEnding(convertedNumericalClass, number);
+        return convertedNumericalClass.toString();
+    }
+
+    private void convertHundreds(StringBuilder convertedNumericalClass, long number) {
         if (number > 99) {
             convertedNumericalClass.append(new HundredsConverter().convert((int) number / 100));
         }
+    }
+
+    private void convertTens(StringBuilder convertedNumericalClass, long number) {
         if (number > 19) {
             String convertedTens = new TensConverter().convert(((int) number - (int) (number / 100) * 100));
             if (!convertedTens.isEmpty()) {
@@ -29,6 +41,9 @@ public class NumericalClassConverter extends NumberConverter {
                 convertedNumericalClass.append(convertedTens);
             }
         }
+    }
+
+    private void convertDigits(StringBuilder convertedNumericalClass, long number) {
         String convertedDigits = new DigitsConverter(getClassNumber()).convert((int) number - (int) (number / 100) * 100);
         if (!convertedDigits.isEmpty()) {
             if (!convertedNumericalClass.toString().isEmpty()) {
@@ -36,16 +51,18 @@ public class NumericalClassConverter extends NumberConverter {
             }
             convertedNumericalClass.append(convertedDigits);
         }
+    }
+
+    private void addClassname(StringBuilder convertedNumericalClass) {
         if (!convertedNumericalClass.toString().isEmpty()) {
             if (!getDictionary().getOrDefault(getClassNumber(), EMPTY_STRING).isEmpty()) {
                 convertedNumericalClass.append(SEPARATOR).append(getDictionary().getOrDefault(getClassNumber(), EMPTY_STRING));
             }
         }
-        if (number != 0L) {
-            return new EndingConnector(number).connect(convertedNumericalClass.toString());
-        } else {
-            return convertedNumericalClass.toString();
-        }
+    }
+
+    private void addEnding(StringBuilder convertedNumericalClass, long number) {
+        new EndingConnector(number).connect(convertedNumericalClass);
     }
 
     private class EndingConnector {
@@ -53,19 +70,10 @@ public class NumericalClassConverter extends NumberConverter {
         private static final String I_ENDING = "и";
         private static final String OV_ENDING = "ов";
 
-        private boolean endingConnected;
         private long number;
 
         public EndingConnector(long number) {
             this.number = number;
-        }
-
-        public boolean isEndingConnected() {
-            return endingConnected;
-        }
-
-        public void setEndingConnected(boolean endingConnected) {
-            this.endingConnected = endingConnected;
         }
 
         public long getNumber() {
@@ -76,17 +84,12 @@ public class NumericalClassConverter extends NumberConverter {
             this.number = number;
         }
 
-        public String connect(String string) {
-            if (isEndingConnected()) {
-                return EMPTY_STRING;
-            }
+        public void connect(StringBuilder stringBuilder) {
             if (getClassNumber() == 2) {
-                string += getThousandsEnding();
+                stringBuilder.append(getThousandsEnding());
             } else if (getClassNumber() != 1) {
-                string += getEnding();
+                stringBuilder.append(getEnding());
             }
-            setEndingConnected(true);
-            return string;
         }
 
         private String getThousandsEnding() {

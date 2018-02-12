@@ -25,11 +25,4 @@ public abstract class NumberConverter implements Convertible {
     public void setDictionary(Map<Integer, String> dictionary) {
         this.dictionary = dictionary;
     }
-
-    @Override
-    public String toString() {
-        return "NumberConverter{" + "classNumber=" + classNumber +
-                ", dictionary=" + dictionary +
-                '}';
-    }
 }
