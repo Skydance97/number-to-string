@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Created by Alexander Shukaylo
  * https://github.com/Skydance97/number-to-string
  * on 03.02.2018
- * */
+**/
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
